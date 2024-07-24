@@ -1,3 +1,4 @@
+``` mermaid
 classDiagram
 class Media {
 Integer id
@@ -25,3 +26,5 @@ string tmdbID
     Media <|-- Movie
     Media <|-- Episode
     Serie "1" o-- "0..*" Episode : contains
+
+```
