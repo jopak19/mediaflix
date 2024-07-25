@@ -1,9 +1,8 @@
-package domain;
+package com.jopak.mediaflix.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.antlr.v4.runtime.atn.EpsilonTransition;
 
 import java.util.List;
 @Getter
@@ -14,7 +13,7 @@ public class Serie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "serie")
+    @OneToMany(cascade = CascadeType.ALL)
     List<Episode> episodes;
 
     @ElementCollection(targetClass = Gender.class)

@@ -1,6 +1,4 @@
-package domain;
-
-import jakarta.persistence.Entity;
+package com.jopak.mediaflix.model;
 
 
 public enum Gender {
@@ -10,5 +8,6 @@ public enum Gender {
     COMEDIA,
     ANIME,
     FICCAOCIENTIFICA,
-    AVENTURA
+    AVENTURA,
+    SUSPENSE
 }

@@ -1,4 +1,4 @@
-package domain;
+package com.jopak.mediaflix.model;
 
 import jakarta.persistence.*;
 
