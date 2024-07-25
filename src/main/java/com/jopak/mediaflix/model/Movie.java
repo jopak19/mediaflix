@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
@@ -13,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Movie extends Media{
+public class Movie extends Media implements Serializable {
     @ElementCollection(targetClass = Gender.class)
     @CollectionTable
     @Enumerated(EnumType.STRING)

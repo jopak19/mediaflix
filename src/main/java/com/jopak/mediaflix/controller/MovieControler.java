@@ -1,9 +1,11 @@
 package com.jopak.mediaflix.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jopak.mediaflix.model.Movie;
-import com.jopak.mediaflix.model.Teste;
 import com.jopak.mediaflix.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,10 +25,18 @@ public class MovieControler {
         return movieRespository.findById(id);
     }
 
-    @PutMapping
-    public ResponseEntity<Movie> updateMovie(@RequestBody Movie movieBody){
-       return  null;
+    /**/
+    @PutMapping("/id")
+    public ResponseEntity<Movie> updateMovie(PathVariable id, @RequestBody Movie movieBody){
+        var objectMapper = new ObjectMapper();
+       Optional<Movie> oldMovie = movieRespository.findById(movieBody.getId());
+       if (oldMovie.isEmpty()){
+           return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+       }
+       //oldMovie = objectMapper.readValue(movieBody, Movie.class);
+
        // TODO: update a movie based at moviebody
     }
+
 
 }
