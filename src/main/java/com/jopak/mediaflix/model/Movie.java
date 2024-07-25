@@ -1,14 +1,23 @@
 package com.jopak.mediaflix.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Movie extends Media{
     @ElementCollection(targetClass = Gender.class)
     @CollectionTable
     @Enumerated(EnumType.STRING)
+    @Getter
     List<Gender> genders;
 
 }

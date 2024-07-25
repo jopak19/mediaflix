@@ -8,14 +8,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 @MappedSuperclass
-@Getter
-@Setter
 public abstract class Media {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
     Long id;
     String title;
     String url;
     String imdb;
     String tmdb;
+
 }
