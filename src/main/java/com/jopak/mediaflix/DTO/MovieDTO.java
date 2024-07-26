@@ -5,7 +5,7 @@ import com.jopak.mediaflix.model.Gender;
 import java.util.List;
 
 public record MovieDTO(
-        List<Gender> genders,
+        List<String> genders,
         String title,
         String url,
         String imdbId,

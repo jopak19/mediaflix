@@ -13,10 +13,11 @@ import java.util.List;
 @Entity
 public class Movie extends Media implements Serializable {
 
-    @ElementCollection(targetClass = Gender.class, fetch = FetchType.EAGER)
-    @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "filme_generos" )
+    //@ElementCollection(targetClass = Gender.class, fetch = FetchType.EAGER)
+    //@Enumerated(EnumType.STRING)
+    //@CollectionTable(name = "filme_generos" )
     //@Column(name = "gender", nullable = false)
+    @OneToMany(fetch = FetchType.EAGER)
     List<Gender> genders;
 
     @Override

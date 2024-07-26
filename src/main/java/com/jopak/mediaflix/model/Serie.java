@@ -16,8 +16,9 @@ public class Serie {
     @OneToMany(cascade = CascadeType.ALL)
     List<Episode> episodes;
 
-    @ElementCollection(targetClass = Gender.class)
-    @CollectionTable
-    @Enumerated(EnumType.STRING)
+    //@ElementCollection(targetClass = Gender.class)
+    //@CollectionTable
+    //@Enumerated(EnumType.STRING)
+    @OneToMany(cascade = CascadeType.ALL)
     List<Gender> genders;
 }

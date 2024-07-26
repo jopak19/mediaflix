@@ -1,7 +1,9 @@
 package com.jopak.mediaflix.service;
 
 import com.jopak.mediaflix.DTO.MovieDTO;
+import com.jopak.mediaflix.model.Gender;
 import com.jopak.mediaflix.model.Movie;
+import com.jopak.mediaflix.repository.GenderRepository;
 import com.jopak.mediaflix.repository.MovieRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +12,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class MovieService {
 
     @Autowired
     MovieRepository movieRepository;
+    @Autowired
+    GenderRepository genderRepository;
 
     @Autowired
     ModelMapper modelMapper;
@@ -29,7 +34,11 @@ public class MovieService {
     @Transactional
     public Movie createMovie(MovieDTO movieDTO){
         Movie newMovie = new Movie(); //modelMapper.map(movieDTO, Movie.class);
-        newMovie.setGenders(movieDTO.genders());
+        List<Gender> genders = movieDTO.genders().stream()
+                .map(name -> genderRepository.findById(name).orElseThrow(() -> new RuntimeException("Genero not found: " + name)))
+                .collect(Collectors.toList());
+        newMovie.setGenders(genders);
+        //newMovie.setGenders(movieDTO.genders());
         newMovie.setTmdb(movieDTO.tmdbId());
         newMovie.setImdb(movieDTO.imdbId());
         newMovie.setTitle(movieDTO.title());
