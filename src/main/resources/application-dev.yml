@@ -3,9 +3,8 @@ spring:
     name: mediaflix
   datasource:
     url: jdbc:h2:mem:media
-    username: sdw2023
+    username: media
     password:
-    DB_CLOSE_DELAY: -1
   jpa:
     show-sql: true
     open-in-view: false

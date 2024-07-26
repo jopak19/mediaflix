@@ -1,5 +1,7 @@
 package com.jopak.mediaflix.model;
 
+import jakarta.persistence.Entity;
+
 
 public enum Gender {
     TERROR,
