@@ -7,6 +7,7 @@ import com.jopak.mediaflix.repository.GenderRepository;
 import com.jopak.mediaflix.repository.MovieRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,15 +36,14 @@ public class MovieService {
     public Movie createMovie(MovieDTO movieDTO){
         Movie newMovie = new Movie(); //modelMapper.map(movieDTO, Movie.class);
         List<Gender> genders = movieDTO.genders().stream()
-                .map(name -> genderRepository.findById(name).orElseThrow(() -> new RuntimeException("Genero not found: " + name)))
+                .map(name -> genderRepository.findByName(name).orElseThrow(() -> new RuntimeException("Genero not found: " + name)))
                 .collect(Collectors.toList());
         newMovie.setGenders(genders);
-        //newMovie.setGenders(movieDTO.genders());
         newMovie.setTmdb(movieDTO.tmdbId());
         newMovie.setImdb(movieDTO.imdbId());
         newMovie.setTitle(movieDTO.title());
         newMovie.setUrl(movieDTO.url());
-        System.out.println(newMovie.toString());
+        //modelMapper.map(newMovie, Movie.class);
         movieRepository.save(newMovie);
         return newMovie;
     }
@@ -57,5 +57,14 @@ public class MovieService {
         updatedMovie = modelMapper.map(movieDTO, Movie.class);
         movieRepository.save(updatedMovie);
         return updatedMovie;
+    }
+    public boolean deleteMovie(Long id){
+        Optional<Movie> oldMovie = movieRepository.findById(id);
+        if (oldMovie.isEmpty()){
+            return false;
+        }else {
+            movieRepository.deleteById(id);
+            return true;
+        }
     }
 }
